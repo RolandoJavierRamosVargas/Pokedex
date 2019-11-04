@@ -48,9 +48,8 @@ export class HomeComponent implements OnInit {
         return Promise.all(this.peticionesGetPokemon)
     })
     .then((resultados:any)=>{
-        console.log(resultados);
-        
         this.datosAgrupadosDePokemones=resultados;
+        this.datosAgrupadosDePokemones.sort((primerPokemon,segundoPokemon) => primerPokemon.name.localeCompare(segundoPokemon.name));   
       }) 
     .catch((e)=>{
       console.log(e);
@@ -66,24 +65,16 @@ export class HomeComponent implements OnInit {
       this.urlSiguiente.push(results.next);
       this.results.push(results.results);
       results.results.forEach((pokemon)=>{
-        peticionesGetPokemon.push(this.pokeApiService.getPokemonDeUrl(pokemon.url).toPromise());
+      peticionesGetPokemon.push(this.pokeApiService.getPokemonDeUrl(pokemon.url).toPromise());
         
       })     
       return Promise.all(peticionesGetPokemon)
   })
   .then((resultados:any)=>{
-    console.log("los datos agrupados de pokemones hasta el momento son:",this.datosAgrupadosDePokemones);
-    
-    console.log("el resultado en esta iteracion es:",resultados);
       resultados.forEach(elementos => {
         this.datosAgrupadosDePokemones.push(elementos);  
       });
-      
-      console.log("***************************");
-      
-      console.log("Los datos agrupados de pokemones son:",this.datosAgrupadosDePokemones);
-      
-      
+      this.datosAgrupadosDePokemones.sort((primerPokemon,segundoPokemon) => primerPokemon.name.localeCompare(segundoPokemon.name));
     }) 
   .catch((e)=>{
     console.log(e);
