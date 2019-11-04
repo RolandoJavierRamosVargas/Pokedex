@@ -1,0 +1,23 @@
+<h1>Busqueda de un Pokemon</h1>
+<input type="text" class="form-control" [(ngModel)]="nombreDeBusqueda">  
+
+ <div class="card-columns">
+     <div class="card" *ngFor="let pokemon of datosAgrupadosDePokemones| search:nombreDeBusqueda:'name' ; let i = index">
+        <img [src]="pokemon.sprites.front_default" class="card-img-top " [alt]="pokemon.sprites.front_default">
+        <div class="card-body ">
+            <h5 class="card-title "> {{pokemon['name']}}</h5>
+            <h5>type: </h5>
+            <ul  class="card-title">
+                <li *ngFor="let tipo of pokemon.types">{{tipo.type.name}}</li>
+            </ul>
+            <button class="btn btn-outline-primary btn-block" [routerLink]="['/pokedetalles',i]">Var mas...</button>
+        </div>
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col col-md-12">
+        <button (click)="mostrarMasPokemon()" type="button" class="btn btn-outline-success">Ver mas Pokemon ...</button>
+    </div>
+</div>
