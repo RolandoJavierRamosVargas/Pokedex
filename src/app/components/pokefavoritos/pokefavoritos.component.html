@@ -1,1 +1,17 @@
-<p>pokefavoritos works!</p>
+<h1>Lista de Pokemones Favoritos</h1>
+<hr>
+
+<div class="row">
+        <div class="card col-md-3" style="width: 18rem;" *ngFor="let pokemon of pokemones; let i=index">
+                <img [src]="pokemon.sprites.front_default" class="card-img-top " [alt]="pokemon.sprites.front_default">
+                <div class="card-body ">
+                    <h5 class="card-title "> {{pokemon['name']}}</h5>
+                    <h5>type: </h5>
+                    <ul  class="card-title">
+                        <li *ngFor="let tipo of pokemon.types">{{tipo.type.name}}</li>
+                    </ul>
+                    <button class="btn btn-outline-primary" [routerLink]="['/pokedetalles',pokemon.id]">Ver Mas</button>
+                    <button class="btn btn-outline-danger" (click)="eliminarPokemon(pokemon.id)"> Eliminar </button>
+                </div>
+            </div>
+</div>

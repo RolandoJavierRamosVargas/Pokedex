@@ -17,7 +17,7 @@ export class PokeapiService {
       return results;
     }))
   }
-  getPokemon(key:number){
+  getPokemon(key:string){
     let url=`${this.url}/${key}/`;
     return this.http.get(url).pipe(map(res=>{
       return res;

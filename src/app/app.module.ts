@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -30,7 +32,8 @@ import { SearchPipe } from './search/search.pipe';
     BrowserModule,
     APP_ROUTES,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    InfiniteScrollModule
 
   ],
   providers: [],

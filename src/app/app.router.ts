@@ -8,6 +8,7 @@ const RUTAS: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'pokedetalles/:id', component: PokedetallesComponent },
     { path: 'pokefavoritos', component: PokefavoritosComponent },
+    { path: 'pokefavoritos/:id', component: PokefavoritosComponent },
     { path: '**',pathMatch : 'full', redirectTo: 'home' }
 ];
 

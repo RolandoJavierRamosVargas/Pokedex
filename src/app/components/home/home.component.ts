@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener,OnInit } from '@angular/core';
 import { PokeapiService } from '../../services/pokeapi.service';
-import { FormsModule } from '@angular/forms';
-import { Observable , forkJoin } from 'rxjs';
-import { Pokemon } from '../modelo/Pokemon';
-import { promise } from 'protractor';
+
 
 @Component({
   selector: 'app-home',
@@ -12,24 +9,35 @@ import { promise } from 'protractor';
 })
 export class HomeComponent implements OnInit {
 
+  
+  showGoUpButton: boolean;
+  showScrollHeight = 400;
+  hideScrollHeight = 200;
+
   nombreDeBusqueda:string="";
   pokemones:any ;
   results:any[]=[];
-  urlsPokemones:any[]=[];
+  
   urlSiguiente:string [] =[];
   peticionesGetPokemon:any[]=[];
   datosAgrupadosDePokemones:any[]=[];
-  urlImagen:string="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{i+1}}.png";
+
+  pokemonesAgregados:any[]=[];
+
 
   constructor(private pokeApiService : PokeapiService) {
      this.declararPokemones();
+     this.showGoUpButton=false;
      
+     if(localStorage.getItem('key')){
+       this.pokemonesAgregados=JSON.parse(localStorage.getItem('key'));
+     }
         
    }
   ngOnInit() {
   }
 
-  getPokemon(key:number){
+  getPokemon(key:string){
     return this.pokeApiService.getPokemon(key).subscribe((data:any)=>{
         return data.sprites.front_default
     })
@@ -48,6 +56,8 @@ export class HomeComponent implements OnInit {
         return Promise.all(this.peticionesGetPokemon)
     })
     .then((resultados:any)=>{
+      console.log("Los resultados son: ",resultados);
+      
         this.datosAgrupadosDePokemones=resultados;
         this.datosAgrupadosDePokemones.sort((primerPokemon,segundoPokemon) => primerPokemon.name.localeCompare(segundoPokemon.name));   
       }) 
@@ -80,8 +90,42 @@ export class HomeComponent implements OnInit {
     console.log(e);
     
 
-  })
-    
+  }) 
   }
+
+scrollTop() {
+    document.body.scrollTop = 0; // Safari
+    document.documentElement.scrollTop = 0; // Other
+}
+
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (( window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop) > this.showScrollHeight) {
+      this.showGoUpButton = true;
+    } else if ( this.showGoUpButton &&
+      (window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop)
+      < this.hideScrollHeight) {
+      this.showGoUpButton = false;
+    }
+  } 
+
+ agregarPokemon(id:string) {
+   if(!this.pokemonesAgregados.includes(id)){
+    this.pokemonesAgregados.push(id);  
+  }
+   
+   this.guardarPokemon();
+ }
+ guardarPokemon(){
+   localStorage.setItem('key',JSON.stringify(this.pokemonesAgregados));
+ }
+ 
+
+  
 
   }
