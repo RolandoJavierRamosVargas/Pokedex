@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col col-md-4 m-auto">
+      <h3 class="text-center">Sign In</h3>
+      <div class="card">
+        <div class="card-header">
+          <img src="https://esports.as.com/2019/09/13/bonus/Pokemon-legendarios-historia_1281781834_258167_1440x600.jpg"
+            alt="Image" class="card-img-top" />
+        </div>
+        <div class="card-body">
+          <div class="input" class="form-group">
+            <input type="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Email"
+              autofocus />
+          </div>
+
+          <div class="input" class="form-group">
+            <input type="password" name="password" [(ngModel)]="user.password" class="form-control"
+              placeholder="Password" />
+            <div class="form-group">
+              <button type="submit" (click)="login('emailWithPassword')"  class="btn btn-primary btn-block">
+                OK
+              </button>
+              <a routerLink='/register' >Sign in</a>
+            </div>
+            <h6>Or:</h6>
+            <div class="form-group">
+              <button type="submit" (click)="login('google')" value="" class="btn btn-secondary btn-block">
+                Google
+              </button>
+              
+            </div>
+            <div class="form-group">
+              <button type="submit" (click)="login('facebook')" value="" class="btn btn-success btn-block">
+                Facebook
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

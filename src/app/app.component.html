@@ -1,4 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container main-container">
+    <div class="text-right" *ngIf="authService.user.id">
+        <button class="btn btn-danger" (click)="authService.logout()">Log Out</button>
+    </div>
     <router-outlet></router-outlet>
 </div>

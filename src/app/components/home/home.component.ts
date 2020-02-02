@@ -1,5 +1,6 @@
 import { Component, HostListener,OnInit } from '@angular/core';
 import { PokeapiService } from '../../services/pokeapi.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -9,7 +10,8 @@ import { PokeapiService } from '../../services/pokeapi.service';
 })
 export class HomeComponent implements OnInit {
 
-  
+  user
+
   showGoUpButton: boolean;
   showScrollHeight = 400;
   hideScrollHeight = 200;
@@ -25,13 +27,14 @@ export class HomeComponent implements OnInit {
   pokemonesAgregados:any[]=[];
 
 
-  constructor(private pokeApiService : PokeapiService) {
+  constructor(private pokeApiService : PokeapiService,public auth:AuthService) {
      this.declararPokemones();
      this.showGoUpButton=false;
      
      if(localStorage.getItem('key')){
        this.pokemonesAgregados=JSON.parse(localStorage.getItem('key'));
      }
+     console.log(this.auth.user);
         
    }
   ngOnInit() {

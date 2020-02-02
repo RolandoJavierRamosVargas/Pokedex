@@ -17,7 +17,7 @@
             <ul  class="card-title">
                 <li *ngFor="let tipo of pokemon.types">{{tipo.type.name}}</li>
             </ul>
-            <button class="btn btn-outline-primary" [routerLink]="['/pokedetalles',pokemon.id]">Var Mas</button>
+            <button class="btn btn-outline-primary" [routerLink]="['/pokedetalles',pokemon.id]">Var Mas ...</button>
             <button class="btn btn-outline-danger" (click)="agregarPokemon(pokemon.id)" >Añadir</button>
         </div>
     </div>
