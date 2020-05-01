@@ -9,8 +9,16 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   title = 'pokedex';
 
-  constructor(public authService:AuthService){
+  user ={
+    id:''
+  }
 
+  constructor(public authService:AuthService){
+    this.authService.getDatesUser().subscribe(user=>{
+      if(!user) return;
+      console.log(user);
+      this.user.id=user.uid;
+    })
   }
   logOut(){
       this.authService.logout();

@@ -12,11 +12,7 @@ const RUTAS: Routes = [
     { path: 'pokedetalles/:id', component: PokedetallesComponent },
     { path: 'pokefavoritos', component: PokefavoritosComponent },
     { path: 'pokefavoritos/:id', component: PokefavoritosComponent },
-    // { path: '**',pathMatch : 'full', redirectTo: 'home' },
-    { path: 'login', component: LoginComponent},
-    { path: 'register', component: RegisterComponent},
-    { path: 'user', component: UserComponent},
-    { path: '**', redirectTo: 'login' , pathMatch:'full'},
+    { path: '**',pathMatch : 'full', redirectTo: 'home' },
 ];
 
 export const APP_ROUTES = RouterModule.forRoot(RUTAS);

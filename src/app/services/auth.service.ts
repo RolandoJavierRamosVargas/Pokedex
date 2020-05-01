@@ -7,22 +7,11 @@ import { User } from '../components/template/userTemplate';
   providedIn: "root"
 })
 export class AuthService {
-  public user:User={
-    name:'',
-    id:'',
-    password:'',
-    email:''
-  }
   constructor(public afAuth: AngularFireAuth) {
-    this.afAuth.user.subscribe( user=>{
-        console.log(user);
-        if(user== null){
-          return ;
-        }else{
-          this.user.email=user.email;
-          this.user.id=user.uid;
-        }
-    })
+    
+  }
+  getDatesUser(){
+    return  this.afAuth.user;
   }
 
   doFacebookLogin() {
@@ -41,6 +30,5 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut();
-    this.user.id='';
   }
 }

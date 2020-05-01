@@ -1,6 +1,9 @@
 import { Component, HostListener,OnInit } from '@angular/core';
 import { PokeapiService } from '../../services/pokeapi.service';
 import { AuthService } from '../../services/auth.service';
+import { FirebaseServiceService } from '../../services/firebase-service.service';
+import { User } from '../template/userTemplate';
+
 
 
 @Component({
@@ -10,7 +13,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  user
+  idUser={
+    idPokemon:'',
+    email:''
+  }
 
   showGoUpButton: boolean;
   showScrollHeight = 400;
@@ -27,14 +33,15 @@ export class HomeComponent implements OnInit {
   pokemonesAgregados:any[]=[];
 
 
-  constructor(private pokeApiService : PokeapiService,public auth:AuthService) {
+  constructor(private pokeApiService : PokeapiService,public auth:AuthService,public firebaseService:FirebaseServiceService) {
+    this.auth.getDatesUser().subscribe(user=>{
+    })
      this.declararPokemones();
      this.showGoUpButton=false;
      
      if(localStorage.getItem('key')){
        this.pokemonesAgregados=JSON.parse(localStorage.getItem('key'));
      }
-     console.log(this.auth.user);
         
    }
   ngOnInit() {
@@ -119,16 +126,11 @@ scrollTop() {
 
  agregarPokemon(id:string) {
    if(!this.pokemonesAgregados.includes(id)){
-    this.pokemonesAgregados.push(id);  
+    this.pokemonesAgregados.push(id);
+    this.guardarPokemon();  
   }
-   
-   this.guardarPokemon();
  }
  guardarPokemon(){
    localStorage.setItem('key',JSON.stringify(this.pokemonesAgregados));
  }
- 
-
-  
-
-  }
+}

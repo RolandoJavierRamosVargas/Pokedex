@@ -13,6 +13,7 @@ export class PokefavoritosComponent implements OnInit {
 
 
   constructor(private pokeApi:PokeapiService) { 
+    console.log("se pasaran los favoritos");
     if(localStorage.getItem('key')){
       this.pokemonesId=JSON.parse(localStorage.getItem('key'));
       console.log(this.pokemonesId);
